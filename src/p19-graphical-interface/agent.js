@@ -1,6 +1,18 @@
+// Un fonction 'usine' fabriquant un agent. Les options d'initialisation
+// sont volontairement restreintes au maximum : la fonction ne prend
+// qu'un argument (optionnel), permettant de spécifier la position
+// de l'agent lors de sa création.
+//
+// La philosophie derrière ce choix est qu'il est très facile,
+// si le besoin s'en fait sentir, de modifier 'manuellement' les
+// propriétés de l'objet après sa création. L'option de créer directement
+// l'agent à la position souhaitée est en revanche fournie car l'édition
+// manuelle de la propriété 'position' présente des risques : on pourrait
+// oublier de mettre à jour la copie 'previousPosition'.
+
 function createAgent(position) {
 
-    // Création du nouvel objet 'agent'
+    // Création du nouvel objet 'Agent'
     var a = {};
 
     // Initialisation
@@ -17,9 +29,9 @@ function createAgent(position) {
         this.position.y += sin(this.angle) * this.stepSize;
         if (this.isPositionResetWhenOutside && this.isOutsideSketch() > 0) {
             this.position = createVector(random(width), random(height));
-            this.previousPosition = a.position.copy();
+            this.previousPosition = this.position.copy();
         }
-    }
+    };
 
     // Une méthode permettant de vérifier si l'agent est sorti des limites de l'espace du sketch (+ marges)
     // La méthode renvoie les valeurs suivantes :
@@ -29,29 +41,20 @@ function createAgent(position) {
     // 3: l'agent est sorti par le bas
     // 4: l'agent est sorti par la gauche
     a.isOutsideSketch = function() {
-        if (this.position.y < 0)
-        {
+        if (this.position.y < 0) {
             return 1;
-        }
-        else if (this.position.x > width)
-        {
+        } else if (this.position.x > width) {
             return 2;
-        }
-        else if (this.position.y > height)
-        {
+        } else if (this.position.y > height) {
             return 3;
-        }
-        else if (this.position.x < 0)
-        {
+        } else if (this.position.x < 0) {
             return 4;
-        }
-        else
-        {
+        } else {
             return 0;
         }
-    }
+    };
 
-    // Retour de l'object 'agent'
+    // Retour de l'object 'Agent'
     return a;
 
 }

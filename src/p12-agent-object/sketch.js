@@ -9,8 +9,8 @@ var timeOfLastUpdate;
 
 function setup() {
     createCanvas(600, 600);
-    agent = createAgent(); // Initialisation avec une position aléatoire ('createAgent' appelée sans argument)
-    agent.stepSize = stepSize; // Les autres propriétés peuvent facilement être modifiées par la suite
+    agent = createAgent(createVector(width/2, height/2)); // Création d'un agent
+    agent.stepSize = stepSize; // Les propriétés de l'agent peuvent facilement être modifiées après sa création
     background(255);
     timeOfLastUpdate = millis();
 }
