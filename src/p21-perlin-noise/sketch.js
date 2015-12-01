@@ -10,7 +10,7 @@ function setup() {
 
 function drawPerlinValues() {
     for (var i = 0; i < width; i++) {
-        for (var j = 0; j < width; j++) {
+        for (var j = 0; j < height; j++) {
             var v = noise(i, j);
             stroke(v * noiseIntensity); // La fonction 'noise' renvoie des valeurs entre 0 et 1. Après multiplication, nous obtenons donc des valeurs de gris entre 0 et noiseIntensity.
             point(i, j);
