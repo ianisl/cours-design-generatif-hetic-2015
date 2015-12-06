@@ -1,5 +1,4 @@
-Cours Design Génératif HETIC 2015
-======
+# Cours Design Génératif HETIC 2015
 
 Sketchs de référence et outils conçus pour le cours *Design Génératif* de l'HETIC, édition 2015.
 

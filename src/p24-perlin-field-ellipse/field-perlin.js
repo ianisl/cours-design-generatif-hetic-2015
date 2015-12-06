@@ -1,7 +1,6 @@
 // Une fonction 'usine' fabriquant un champ de force basé sur un bruit de Perlin.è
 
-function createPerlinField(fieldIntensity, fieldScale)
-{
+function createPerlinField(fieldIntensity, fieldScale) {
 
     // Création du nouvel objet 'Perlin Field'
     var f = {};

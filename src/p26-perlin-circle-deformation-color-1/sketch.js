@@ -2,18 +2,24 @@
 var fieldIntensity = 10;
 var fieldScale = 30;
 var agentCount = 500;
-var circleRadius = 150; // Rayon du cercle à déformer
+var circleRadius = 150;
 var circleAlpha = 20;
 var circleLineWeight = 1.5;
+var circleHue = 220;
+var circleSaturation = 65;
+var circleBrightness = 0;
+var saturationStep = -0.1;
+var brightnessStep = 0.2; // Vitesse des variations de luminosité au cours du temps
 /////////////
 
 var field;
 var agents;
+var fader;
 
 function setup() {
     createCanvas(600, 600);
     field = createPerlinField(fieldIntensity, fieldScale);
-    var angleStep = TWO_PI / agentCount; // Calcul de l'écart angulaire entre deux positions initiales d'agents
+    var angleStep = TWO_PI / agentCount;
     agents = [];
     var a, x, y;
     for (var i = agentCount - 1; i >= 0; i--) {
@@ -23,8 +29,10 @@ function setup() {
         a.isPositionResetWhenOutside = false; // Les agents ne sont pas ramenés dans l'espace du sketch lorsqu'ils en sortent
         agents.push(a);
     };
+    fader = createColorFader(circleHue, circleSaturation, circleBrightness, 0, saturationStep, brightnessStep);
     initGUI();
     background(255);
+    colorMode(HSB, 360, 100, 100, 255); // On peut à présent travailler uniquement en mode HSB car on ne rafraîchit pas le fond à chaque étape de la boucle draw (la gestion de la transparence du fond serait problématique en mode HSB)
 }
 
 function draw() {
@@ -32,7 +40,7 @@ function draw() {
     agents.forEach(function(a) {
         a.angle = field.getFieldValue(a.position);
         a.updatePosition();
-        stroke(0, circleAlpha);
+        stroke(fader.x, fader.y, fader.z, circleAlpha);
         strokeWeight(circleLineWeight);
         noFill();
         curveVertex(a.position.x, a.position.y);
