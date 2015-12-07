@@ -11,7 +11,7 @@ function createPerlinField(fieldIntensity, fieldScale) {
 
     // Une méthode permettant d'obtenir la valeur du champ de force à une position donnée
     f.getFieldValue = function(position) {
-        return noise(position.x / this.fieldScale, position.y / this.fieldScale) * this.fieldIntensity;
+        return noise(position.x / f.fieldScale, position.y / f.fieldScale) * f.fieldIntensity;
     };
 
     // Retour de l'object 'Perlin Field'

@@ -1,32 +1,28 @@
-(function() {
+// Une fonction 'usine' fabriquant un variateur de couleurs. Le choix du mode de couleur est laissé libre à l'utilisateur. L'utilitaire se contente de faire évoluer trois composantes 'x', 'y' et 'z' à l'aide d'incréments 'xStep', 'yStep' et 'zStep'.
 
-    var faders = []; // Stockage dans une fermeture de la liste de tous les faders actifs dans notre sketch
+function createColorFader(x, y, z, xStep, yStep, zStep) {
 
-    p5.prototype.createColorFader = function(x, y, z, xStep, yStep, zStep) {
-        var f = {};
-        f.x = x; // 'x' : 'red' ou 'hue'
-        f.y = y; // 'y' : 'green' ou 'saturation'
-        f.z = z; // 'x' : 'blue' ou 'brightness'
-        f.xStep = xStep;
-        f.yStep = yStep;
-        f.zStep = zStep;
-        f.update = function() {
-            f.x += xStep;
-            f.y += yStep;
-            f.z += zStep;
-        };
-        faders.push(f); // Ajout du fader nouvellement créé à la liste
-        return f;
+    // Création du nouvel objet 'Color Fader'
+    var f = {};
+
+    // Initialisation
+    f.x = x; // 'x' : 'red' ou 'hue'
+    f.y = y; // 'y' : 'green' ou 'saturation'
+    f.z = z; // 'x' : 'blue' ou 'brightness'
+    f.xStep = xStep;
+    f.yStep = yStep;
+    f.zStep = zStep;
+
+    // Une méthode permettant de mettre à jour les composantes de la couleur
+    f.update = function() {
+        f.x += xStep;
+        f.y += yStep;
+        f.z += zStep;
     };
 
-    // Méthode de mise à jour de tous les faders
-    p5.prototype.updateColorFaders = function() {
-        faders.forEach(function(f) {
-            f.update();
-        });
-    };
+    // Mise en place de l'appel automatique de 'f.update' au début de chaque boucle draw de notre sketch
+    p5.prototype.registerMethod('pre', f.update);
 
-    // Mise en place de l'appel automatique de 'p5.prototype.updateColorFaders' au début de chaque boucle draw de notre sketch
-    p5.prototype.registerMethod('pre', p5.prototype.updateColorFaders);
-
-}());
+    // Retour de l'objet 'Color Fader'
+    return f;
+}

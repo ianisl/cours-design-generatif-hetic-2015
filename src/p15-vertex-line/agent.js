@@ -24,12 +24,12 @@ function createAgent(position) {
 
     // Une méthode mettant à jour de la position de l'agent en fonction de son angle actuel
     a.updatePosition = function() {
-        this.previousPosition = this.position.copy();
-        this.position.x += cos(this.angle) * this.stepSize;
-        this.position.y += sin(this.angle) * this.stepSize;
-        if (this.isPositionResetWhenOutside && this.isOutsideSketch() > 0) {
-            this.position = createVector(random(width), random(height));
-            this.previousPosition = this.position.copy();
+        a.previousPosition = a.position.copy();
+        a.position.x += cos(a.angle) * a.stepSize;
+        a.position.y += sin(a.angle) * a.stepSize;
+        if (a.isPositionResetWhenOutside && a.isOutsideSketch() > 0) {
+            a.position = createVector(random(width), random(height));
+            a.previousPosition = a.position.copy();
         }
     };
 
@@ -41,13 +41,13 @@ function createAgent(position) {
     // 3: l'agent est sorti par le bas
     // 4: l'agent est sorti par la gauche
     a.isOutsideSketch = function() {
-        if (this.position.y < 0) {
+        if (a.position.y < 0) {
             return 1;
-        } else if (this.position.x > width) {
+        } else if (a.position.x > width) {
             return 2;
-        } else if (this.position.y > height) {
+        } else if (a.position.y > height) {
             return 3;
-        } else if (this.position.x < 0) {
+        } else if (a.position.x < 0) {
             return 4;
         } else {
             return 0;
