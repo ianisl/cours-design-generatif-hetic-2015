@@ -15,9 +15,9 @@ function createColorFader(x, y, z, xStep, yStep, zStep) {
 
     // Une méthode permettant de mettre à jour les composantes de la couleur
     f.update = function() {
-        f.x += xStep;
-        f.y += yStep;
-        f.z += zStep;
+        f.x += f.xStep;
+        f.y += f.yStep;
+        f.z += f.zStep;
     };
 
     // Mise en place de l'appel automatique de 'f.update' au début de chaque boucle draw de notre sketch

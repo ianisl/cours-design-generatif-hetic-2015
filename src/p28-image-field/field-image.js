@@ -1,6 +1,6 @@
 // Une fonction 'usine' fabriquant un champ de force basé sur la luminosité des pixels d'une image
 
-createImageField = function(fieldIntensity, image) {
+function createImageField(fieldIntensity, image) {
 
     // Création du nouvel objet 'Image Field'
     var f = {};
